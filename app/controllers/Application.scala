@@ -8,5 +8,9 @@ object Application extends Controller {
   def index = Action {
     Ok(views.html.index("Squirrel Butts"))
   }
+  
+  def cats(cat:String) = Action {
+    Ok("Meow! fluffcat = " + cat)
+  }
 
 }
