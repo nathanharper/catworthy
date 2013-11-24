@@ -10,7 +10,7 @@ object Application extends Controller {
   }
   
   def cats(cat:String) = Action {
-    Ok("Meow! fluffcat = " + cat)
+    Ok(views.html.cats(cat))
   }
 
 }
