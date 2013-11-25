@@ -1,4 +1,4 @@
-@(cat: String)
+@(cat: Cat)
 
 <!DOCTYPE html>
 
@@ -12,6 +12,13 @@
         <script src="@routes.Assets.at("javascripts/cat.js")" type="text/javascript"></script>
     </head>
     <body>
-        <div>Meow! fluffchat = @cat</div>
+    	@* "Fork Me On Github" ribbon *@
+        <a href="https://github.com/nathanharper/catworthy">
+        	<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub">
+       	</a>
+
+        <h2>@cat.title</h2>
+        <div>@cat.subcopy</div>
+        <img alt="rat" src="@routes.Assets.at("images/" + cat.image)" />
     </body>
 </html>
