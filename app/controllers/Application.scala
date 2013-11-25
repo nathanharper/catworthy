@@ -16,17 +16,18 @@ object Application extends Controller {
   
   def cats(cat:String) = Action {
     DB withConnection { implicit c =>
-      SQL("SELECT * FROM `cat` WHERE `url` = {cat}")
-	    .on("cat" -> cat)().headOption match {
-	      case None => NotFound("No such cat.")
-	      case Some(row) => Ok(views.html.cats(Cat.tupled((
-		    row[Option[String]]("title") getOrElse "",
-		    row[Option[String]]("subcopy") getOrElse "",
-		    row[Option[String]]("body") getOrElse "",
-		    row[Option[String]]("image") getOrElse "",
-		    row[Option[String]]("video") getOrElse ""
-	      ))))
-	    } 
+      SQL("""
+        SELECT * FROM `cat` WHERE `url` = {cat} LIMIT 1
+      """).on("cat" -> cat)().headOption match {
+        case None => NotFound("No such cat.")
+        case Some(row) => Ok(views.html.cats(Cat.tupled((
+	      row[Option[String]]("title") getOrElse "",
+	      row[Option[String]]("subcopy") getOrElse "",
+	      row[Option[String]]("body") getOrElse "",
+	      row[Option[String]]("image") getOrElse "",
+	      row[Option[String]]("video") getOrElse ""
+        ))))
+      } 
     }
   }
 
